@@ -13,14 +13,14 @@ const initialtodo = {
   id: null,
   name: '',
   completed: false,
-  dateformat: getformat('hh:mm a')
+  dateformat: ''
 };
 
 export const TodoReducer = (state = Initstate, action) => {
   switch (action.type) {
     case TodoActions.ADD_TODO:
       const newdatatodo = [
-        { ...initialtodo, id: uuid(), name: action.payload },
+        { ...initialtodo, id: uuid(), name: action.payload , dateformat : getformat('hh:mm a')  },
         ...state.todo
       ];
       return { ...state, todo: newdatatodo, isLoading: false };

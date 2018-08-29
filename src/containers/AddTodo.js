@@ -31,7 +31,7 @@ class AddTodo extends PureComponent {
 
   render() {
     const { value } = this.state;
-    const disabledbtn = value == null || value == '';
+    const disabledbtn = value === null || value === '';
     return (
       <Row>
         <Col sm="12" md={{ size: 8, offset: 2 }}>
