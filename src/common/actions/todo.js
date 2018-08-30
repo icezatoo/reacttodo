@@ -1,10 +1,11 @@
 export const GET_TODO = '[Get] Todo ';
 export const ADD_TODO = '[Add] Todo';
 export const REMOVE_TODO = '[Remove] Remove Todo';
-export const FILTER_TODO = '[Filter] filter Todo';
 export const TOGGLE_TODO = '[TOGGLE] Toggle Todo';
-
-export const GetTodo = () => ({ type: GET_TODO });
+export const UPDATE_TODO = '[Update] Update Todo';
+export const SHOW_DIALOG = '[SHOW] Show Dialog';
+export const CLOSE_DIALOG = '[CLOSE] Close Dialog';
+export const UPDATE_DATADIALOG = '[Update] Data Dialog';
 
 export const AddTodolist = payload => ({
   type: ADD_TODO,
@@ -16,12 +17,26 @@ export const RemoveTodolist = payload => ({
   payload
 });
 
-export const FilterTodolist = payload => ({
-  type: FILTER_TODO,
+export const ToggleTodolist = payload => ({
+  type: TOGGLE_TODO,
   payload
 });
 
-export const ToggleTodolist = payload => ({
-  type: TOGGLE_TODO,
+export const Updatetodolist = payload => ({
+  type: UPDATE_TODO,
+  payload
+});
+
+export const ShowDialog = payload => ({
+  type: SHOW_DIALOG,
+  payload
+});
+
+export const CloseDialog = () => ({
+  type: CLOSE_DIALOG
+});
+
+export const UpdatadataDialog = payload => ({
+  type: UPDATE_DATADIALOG,
   payload
 });

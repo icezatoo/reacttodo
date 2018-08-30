@@ -5,29 +5,84 @@ const Initstate = {
   isLoading: false,
   isLoadSuccess: false,
   todo: [],
-  lengthdata: 0,
-  filter: 'ALL'
+  showdialog: false,
+  datatodo: null
 };
 
 const initialtodo = {
   id: null,
   name: '',
   completed: false,
-  dateformat: ''
+  timeformat: '',
+  datenow: null,
+  description: ''
 };
 
 export const TodoReducer = (state = Initstate, action) => {
   switch (action.type) {
-    case TodoActions.ADD_TODO:
+    case TodoActions.ADD_TODO: {
       const newdatatodo = [
-        { ...initialtodo, id: uuid(), name: action.payload , dateformat : getformat('hh:mm a')  },
+        {
+          ...initialtodo,
+          id: uuid(),
+          name: action.payload,
+          datenow: new Date(),
+          timeformat: getformat('hh:mm a')
+        },
         ...state.todo
       ];
-      return { ...state, todo: newdatatodo, isLoading: false };
-    case TodoActions.REMOVE_TODO:
-      const todolist = state.todo;
-      const removetodo = todolist.filter(val => val.id !== action.payload);
-      return { ...state, todo: removetodo, isLoading: false };
+      return { ...state, todo: newdatatodo };
+    }
+    case TodoActions.REMOVE_TODO: {
+      const removetodo = state.todo.filter(val => val.id !== action.payload);
+      return { ...state, todo: [...removetodo] };
+    }
+
+    case TodoActions.TOGGLE_TODO: {
+      const togogletodo = state.todo.map(
+        val =>
+          val.id === action.payload
+            ? { ...val, completed: !val.completed }
+            : val
+      );
+      return { ...state, todo: [...togogletodo] };
+    }
+    case TodoActions.UPDATE_TODO: {
+      const { id } = action.payload;
+      const updateTodo = state.todo.map(
+        val => (val.id === id ? { ...action.payload } : val)
+      );
+      return { ...state, todo: [...updateTodo] };
+    }
+
+    case TodoActions.SHOW_DIALOG: {
+      return { ...state, showdialog: true, datatodo: action.payload };
+    }
+
+    case TodoActions.CLOSE_DIALOG: {
+      return { ...state, showdialog: false, datatodo: null };
+    }
+
+    case TodoActions.UPDATE_DATADIALOG: {
+      const { id } = action.payload;
+      const updatedatadialog = state.todo.map(
+        val =>
+          val.id === id
+            ? {
+                ...action.payload,
+                datenow: new Date(),
+                timeformat: getformat('hh:mm a')
+              }
+            : val
+      );
+      return {
+        ...state,
+        showdialog: false,
+        datatodo: null,
+        todo: [...updatedatadialog]
+      };
+    }
+
     default:
       return state;
   }

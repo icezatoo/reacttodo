@@ -1,18 +1,29 @@
 import React, { PureComponent } from 'react';
 import { Container } from 'reactstrap';
 import AddTodo from './containers/AddTodo';
-import ListTodo from './containers/ListTodo';
+import ControllerTodo from './containers/ControllerTodo';
+import FilterMenu from './containers/FilterMenu';
+import ModalTodo from './containers/ModalTodo';
+import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-// min-height: 100vh;
+import './App.css';
+
+const AddContainer = styled.div`
+  min-height: 100vh;
+  padding: 60px;
+`;
 class App extends PureComponent {
   render() {
     return (
-      <Container>
-        <h1 className="App-title">Welcome to Todo</h1>
-        <AddTodo />
-        <ListTodo />
-      </Container>
+      <AddContainer>
+        <Container>
+          <h1 className="App-title">Welcome to Todo </h1>
+          <AddTodo />
+          <FilterMenu />
+          <ControllerTodo />
+          <ModalTodo />
+        </Container>
+      </AddContainer>
     );
   }
 }

@@ -11,9 +11,9 @@ const ListDateStyle = styled.span`
   margin-left: 10px;
 `;
 
-const ListDate = ({ datadate }) => (
+const ListDate = ({ timeformat }) => (
   <ListDateStyle>
-    <ListText>{datadate}</ListText>
+    <ListText>{timeformat}</ListText>
   </ListDateStyle>
 );
 
